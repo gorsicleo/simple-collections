@@ -20,7 +20,7 @@ public class ArrayIndexedCollectionTest {
 	public void testConstructorWhenInitialCapacityIsSmallerThanCollectionCapacity() {
 		ArrayIndexedCollection instanceToBeUsedInConstructor = new ArrayIndexedCollection(20);
 		ArrayIndexedCollection instance2 = new ArrayIndexedCollection(3,instanceToBeUsedInConstructor);
-		assertEquals(20,instance2.size() );
+		assertEquals(0,instance2.size() );
 	}
 	
 	@Test
@@ -55,7 +55,7 @@ public class ArrayIndexedCollectionTest {
 		verySmallCollection.add(new Object());
 		assertEquals(2, verySmallCollection.size());
 		verySmallCollection.add(new Object());
-		assertEquals(4, verySmallCollection.size());
+		assertEquals(3, verySmallCollection.size());
 		
 	}
 	
@@ -87,15 +87,16 @@ public class ArrayIndexedCollectionTest {
 		collection.clear();
 		assertEquals(null, collection.get(0));
 		assertEquals(null, collection.get(1));
+		assertEquals(0,collection.size());
 	}
 	
 	//method size test
 	@Test
 	public void sizeTest() {
 		ArrayIndexedCollection defaultCollection = new ArrayIndexedCollection();
-		assertEquals(16, defaultCollection.size());
+		assertEquals(0, defaultCollection.size());
 		ArrayIndexedCollection bitBiggerCollection = new ArrayIndexedCollection(24);
-		assertEquals(24, bitBiggerCollection.size());
+		assertEquals(0, bitBiggerCollection.size());
 	}
 	
 	//method insert tests
@@ -128,7 +129,7 @@ public class ArrayIndexedCollectionTest {
 			thisCollectionWillBeFull.add(Integer.valueOf(i));
 		}
 		thisCollectionWillBeFull.insert(Integer.valueOf(-100), 3);
-		assertEquals(20, thisCollectionWillBeFull.size());
+		assertEquals(11, thisCollectionWillBeFull.size());
 		assertEquals(-100, thisCollectionWillBeFull.get(3));
 		assertEquals(3, thisCollectionWillBeFull.get(4));
 		assertEquals(2, thisCollectionWillBeFull.get(2));
@@ -152,6 +153,7 @@ public class ArrayIndexedCollectionTest {
 		collection.remove(5);
 		assertEquals(null,collection.get(0));
 		assertEquals(null,collection.get(5));
+		assertEquals(0,collection.size());
 	}
 	
 	

@@ -10,6 +10,9 @@ package hr.fer.oprpp1.custom.collections;
 public class ArrayIndexedCollection extends Collection {
 
 	/** Keeps count of elements that are currently in collection. */
+	private int occupied;
+	
+	/** Size of internal array*/
 	private int size;
 
 	/** Used array for collection memory */
@@ -27,6 +30,7 @@ public class ArrayIndexedCollection extends Collection {
 		checkValidity(initialCapacity, collection);
 		initializeSize(initialCapacity, collection);
 		elements = new Object[size];
+		occupied = collection.size();
 		copyCollectionToElements(collection);
 	}
 
@@ -39,6 +43,7 @@ public class ArrayIndexedCollection extends Collection {
 	public ArrayIndexedCollection(int initialCapacity) {
 		checkValidityInitialCapacity(initialCapacity);
 		size = initialCapacity;
+		occupied = 0;
 		elements = new Object[size];
 	}
 
@@ -195,6 +200,7 @@ public class ArrayIndexedCollection extends Collection {
 	public void add(Object value) {
 		boolean added = false;
 		checkIfValueIsNull(value);
+		occupied++;
 		for (int i = 0; i < size; i++) {
 			if (elements[i] == null) {
 				elements[i] = value;
@@ -237,7 +243,7 @@ public class ArrayIndexedCollection extends Collection {
 	 */
 	@Override
 	public int size() {
-		return size;
+		return occupied;
 	}
 
 	/**
@@ -247,6 +253,7 @@ public class ArrayIndexedCollection extends Collection {
 	 *
 	 */
 	public void clear() {
+		occupied = 0;
 		for (int i = 0; i < size; i++) {
 			elements[i] = null;
 		}
@@ -266,6 +273,7 @@ public class ArrayIndexedCollection extends Collection {
 	public void insert(Object value, int position) {
 		checkIndexOutOfBounds(position);
 		checkIfValueIsNull(value);
+		occupied++;
 		if (elements[size - 1] == null) {
 			shiftElelemnts(position);
 		} else {
@@ -301,6 +309,7 @@ public class ArrayIndexedCollection extends Collection {
 	 */
 	public void remove(int index) {
 		checkIndexOutOfBounds(index);
+		occupied--;
 		for (int i = index; i < size - 1; i++) {
 			elements[i] = elements[i + 1];
 		}
